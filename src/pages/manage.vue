@@ -1,7 +1,7 @@
 <template>
   <div class="manage">
     <el-row style="height: 100%;">
-      <el-col :span="3" style="min-height: 100%; background-color: #324057;" :class="{width3:isCollapse}">
+      <el-col :span="3" style="height: 100%; background-color: #324057;" :class="{width3:isCollapse}">
         <el-menu
           :collapse="isCollapse"
           class="el-menu-vertical-demo"
@@ -30,9 +30,9 @@
             <i class="el-icon-document"></i>
             <span>订单</span>
           </template>
-          <el-menu-item index="3-1">
+          <el-menu-item index="data-monitor">
             <i class="el-icon-menu"></i>
-            <span slot="title">首页</span>
+            <span slot="title">数据监控</span>
           </el-menu-item>
         </el-submenu>
         <el-submenu index="4" :class="{marginL10:isCollapse}">
@@ -47,7 +47,7 @@
         </el-submenu>
         </el-menu>
       </el-col>
-      <el-col :span="21" :class="{width97:isCollapse}">
+      <el-col :span="21" :class="{width97:isCollapse}" style="height: 100%;background-color: #f5f5f5; overflow: auto;">
         <head-top @showL="showL"></head-top>
         <keep-alive>
           <router-view></router-view>

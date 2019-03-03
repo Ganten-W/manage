@@ -4,3 +4,6 @@
 .el-table td, .el-table th{
   text-align: center;
 }
+.el-dialog--center .el-dialog__body {
+  padding: 0 20px;
+}

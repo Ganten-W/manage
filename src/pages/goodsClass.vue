@@ -58,13 +58,13 @@
             prop="sort"
             label="排序">
           </el-table-column>
-          <el-table-column label="设置" width="200px">
+          <el-table-column label="设置" width="200px" show-overflow-tooltip>
             <template>
               <el-button size="mini">查看下级</el-button>
               <el-button size="mini">转移商品</el-button>
             </template>
           </el-table-column>
-          <el-table-column label="操作" width="200px">
+          <el-table-column label="操作" width="200px" show-overflow-tooltip>
             <template slot-scope="scope">
               <el-button
                 size="mini"

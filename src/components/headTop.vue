@@ -50,6 +50,7 @@
     line-height: 50px;
     text-align: center;
     border-bottom: 1px solid #dcdfe6;
+    background-color: #fff;
     .el-breadcrumb{
       height: 50px;
       line-height: 50px;

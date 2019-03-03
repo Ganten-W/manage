@@ -24,6 +24,11 @@ export default new Router({
           path: '/goods-class',
           component: () => import("../pages/goodsClass"),
           meta:['商品','商品分类'],
+        },
+        {
+          path: '/data-monitor',
+          component: () => import("../pages/dataMonitor"),
+          meta:['订单','数据监控'],
         }]
     }
   ]
