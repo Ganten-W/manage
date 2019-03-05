@@ -40,7 +40,7 @@
             <i class="el-icon-star-on"></i>
             <span>营销</span>
           </template>
-          <el-menu-item index="4-1">
+          <el-menu-item index="manage">
             <i class="el-icon-menu"></i>
             <span slot="title">首页</span>
           </el-menu-item>
@@ -63,7 +63,7 @@
   export default {
     data(){
       return{
-        isCollapse:false
+        isCollapse:false,
       }
     },
     computed: {

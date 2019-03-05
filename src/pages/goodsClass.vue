@@ -14,7 +14,7 @@
     <el-row>
       <el-col :span="24" style="padding: 0 20px;">
         <el-table
-          :data="tableData"
+          :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
           border
           style="width: 100%">
           <el-table-column
@@ -83,9 +83,11 @@
     <el-row>
       <el-col :span="24" style="padding: 20px;text-align: right;">
         <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
           :current-page="currentPage"
           :page-sizes="[5, 10, 15, 20]"
-          :page-size="100"
+          :page-size="pageSize"
           layout="total, sizes, prev, pager, next, jumper"
           :total="this.tableData.length">
         </el-pagination>
@@ -150,8 +152,19 @@
             ifShow: true,
             sort: '1',
           },
+          {
+            serialNum: '6',
+            className: '汽车用品',
+            level: '一级',
+            number: '100',
+            units: '件',
+            navBar: true,
+            ifShow: true,
+            sort: '1',
+          },
         ],
         currentPage:1,
+        pageSize:5
       }
     },
     components: {
@@ -183,6 +196,12 @@
             message: '已取消删除'
           });
         });
+      },
+      handleSizeChange(val) {
+        this.pageSize = val;
+      },
+      handleCurrentChange(val) {
+        this.currentPage = val;
       }
     }
   }

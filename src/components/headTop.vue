@@ -36,7 +36,7 @@
     },
     methods:{
       showL(){
-        this.show=!this.show
+        this.show=!this.show;
         this.$emit('showL', this.show)
       }
     },

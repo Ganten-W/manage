@@ -19,22 +19,22 @@
       :visible.sync="dialogFormVisible">
       <el-form :model="form" label-width="130px" label-position="left">
         <el-form-item label="表格名称">
-          <el-input v-model="form.tableName" size="small"></el-input>
+          <el-input v-model="form.tableName" size="small" clearable></el-input>
         </el-form-item>
         <el-form-item label="负责人">
-          <el-input v-model="form.name" size="small"></el-input>
+          <el-input v-model="form.name" size="small" clearable></el-input>
         </el-form-item>
         <el-form-item label="Process ID">
-          <el-input v-model="form.id" size="small"></el-input>
+          <el-input v-model="form.id" size="small" clearable></el-input>
         </el-form-item>
         <el-form-item label="Process ID负责人">
-          <el-input v-model="form.idName" size="small"></el-input>
+          <el-input v-model="form.idName" size="small" clearable></el-input>
         </el-form-item>
         <el-form-item label="更新日期">
-          <el-input v-model="form.date" size="small"></el-input>
+          <el-input v-model="form.date" size="small" clearable></el-input>
         </el-form-item>
         <el-form-item label="数据量">
-          <el-input v-model="form.number" size="small"></el-input>
+          <el-input v-model="form.number" size="small" clearable></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -49,8 +49,9 @@
     </el-dialog>
     <el-row style="padding: 0 20px;">
       <el-col :span="24">
+        <!--数据分页-->
           <el-table
-            :data="tableData"
+            :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
             border
             tooltip-effect="dark"
             style="width: 100%">
@@ -93,22 +94,22 @@
                   :visible.sync="dialogFormVisible2">
                   <el-form :model="form2" label-width="130px" label-position="left">
                     <el-form-item label="表格名称">
-                      <el-input v-model="form2.tableName" size="small"></el-input>
+                      <el-input v-model="form2.tableName" size="small" clearable></el-input>
                     </el-form-item>
                     <el-form-item label="负责人">
-                      <el-input v-model="form2.name" size="small"></el-input>
+                      <el-input v-model="form2.name" size="small" clearable></el-input>
                     </el-form-item>
                     <el-form-item label="Process ID">
-                      <el-input v-model="form2.id" size="small"></el-input>
+                      <el-input v-model="form2.id" size="small" clearable></el-input>
                     </el-form-item>
                     <el-form-item label="Process ID负责人">
-                      <el-input v-model="form2.idName" size="small"></el-input>
+                      <el-input v-model="form2.idName" size="small" clearable></el-input>
                     </el-form-item>
                     <el-form-item label="更新日期">
-                      <el-input v-model="form2.date" size="small"></el-input>
+                      <el-input v-model="form2.date" size="small" clearable></el-input>
                     </el-form-item>
                     <el-form-item label="数据量">
-                      <el-input v-model="form2.number" size="small"></el-input>
+                      <el-input v-model="form2.number" size="small" clearable></el-input>
                     </el-form-item>
                   </el-form>
                   <div slot="footer" class="dialog-footer">
@@ -130,10 +131,13 @@
     </el-row>
     <el-row>
       <el-col :span="24" style="padding: 20px;text-align: right;">
+        <!--数据分页-->
         <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
           :current-page="currentPage"
-          :page-sizes="[10, 20, 30, 40]"
-          :page-size="100"
+          :page-sizes="[5,10, 15, 20]"
+          :page-size="pageSize"
           layout="total, sizes, prev, pager, next, jumper"
           :total="this.tableData.length">
         </el-pagination>
@@ -232,6 +236,7 @@
         ],
         index:'',
         currentPage:1,
+        pageSize:5,
       }
     },
 
@@ -281,9 +286,14 @@
             message: '已取消删除'
           });
         });
+      },
+      handleSizeChange(val) {
+        this.pageSize = val;
+      },
+      handleCurrentChange(val) {
+        this.currentPage = val;
       }
     }
-
   }
 </script>
 
