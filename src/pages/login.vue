@@ -4,7 +4,7 @@
       <div class="manage-title">
         <p>mall-admin-web</p>
       </div>
-      <el-form :model="loginForm" ref="ruleForm2" class="loginForm">
+      <el-form :model="loginForm" ref="ruleForm2" class="loginForm" :rules="rules">
         <el-form-item prop="username">
           <el-input v-model="loginForm.username" placeholder="用户名" clearable></el-input>
         </el-form-item>
@@ -23,23 +23,56 @@
   export default {
     data() {
       return {
+        url: '../../static/json/username.json',
+        resData: '',
         loginForm: {
-          username: 'admin',
-          password: '123'
-        }
+          username: "",
+          password: ""
+        },
+        rules: {
+          username: [
+            {required: true, message: '请输入用户名', trigger: 'blur'},
+          ],
+          password: [
+            {required: true, message: '请输入密码', trigger: 'blur'},
+          ]
+        },
       }
     },
     methods: {
+      async getUsername() {
+        let res = await this.axios.get(this.url);
+        // console.log(res);
+        this.resData = res.data;
+        // console.log(this.resData)
+      },
+      //登录验证
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            this.$router.push("manage")
+            // console.log(this.loginForm.username);
+            for (let i = 0; i < this.resData.length; i++) {
+              if (this.resData[i].username === this.loginForm.username) {
+                if (this.resData[i].password === this.loginForm.password) {
+                  this.$router.push("manage")
+                  this.$message.success("登录成功")
+                } else {
+                  this.$message.error("密码错误")
+                }
+                break
+              } else if (i === (this.resData.length - 1)) {
+                this.$message.error("该用户名未注册")
+              }
+            }
           } else {
             console.log('error submit!!');
             return false;
           }
         });
       },
+    },
+    created() {
+      this.getUsername()
     }
   }
 </script>
@@ -64,9 +97,11 @@
       -webkit-border-radius: 5px;
       -moz-border-radius: 5px;
       border-radius: 5px;
-      .el-button{
+
+      .el-button {
         width: 100%;
       }
+
       .manage-title {
         position: absolute;
         top: -100px;

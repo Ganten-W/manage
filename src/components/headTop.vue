@@ -2,7 +2,7 @@
   <div class="head-top">
     <el-row>
       <el-col :span="1" class="icon">
-          <i class="el-icon-rank" @click="showL()"></i>
+        <i class="el-icon-rank" @click="showL()"></i>
       </el-col>
       <el-col :span="10">
         <el-breadcrumb separator="/">
@@ -10,15 +10,15 @@
           <el-breadcrumb-item v-for="(item, index) in $route.meta" :key="index">{{item}}
           </el-breadcrumb-item>
         </el-breadcrumb>
-        </el-col>
+      </el-col>
       <el-col :span="12" style="text-align: right;">
-        <el-dropdown trigger="click">
+        <el-dropdown trigger="click" @command="handleCommand">
           <span class="el-dropdown-link">
             下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>首页</el-dropdown-item>
-            <el-dropdown-item>退出</el-dropdown-item>
+            <el-dropdown-item command="jumpHome">首页</el-dropdown-item>
+            <el-dropdown-item command="jumpLogin">退出</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </el-col>
@@ -30,14 +30,18 @@
   export default {
     name: 'headTop',
     data() {
-      return{
-        show:false,
+      return {
+        show: false,
       }
     },
-    methods:{
-      showL(){
-        this.show=!this.show;
+    methods: {
+      showL() {
+        this.show = !this.show;
         this.$emit('showL', this.show)
+      },
+      //自带事件跳转路由
+      handleCommand(command) {
+        command==='jumpHome'?this.$router.replace("manage"):this.$router.push("/")
       }
     },
   }
@@ -51,10 +55,12 @@
     text-align: center;
     border-bottom: 1px solid #dcdfe6;
     background-color: #fff;
-    .el-breadcrumb{
+
+    .el-breadcrumb {
       height: 50px;
       line-height: 50px;
     }
+
     .icon {
       font-size: 24px;
     }

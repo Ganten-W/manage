@@ -17,41 +17,38 @@
 <script>
 
   export default {
-    data(){
-      return{
-
-      }
+    data() {
+      return {}
     },
-    components:{
-    },
-    methods:{
-
-    },
-    watch:{
-    }
+    components: {},
+    methods: {},
+    watch: {}
   }
 </script>
 
 <style lang="scss" scoped>
-.home{
-  .url{
-    margin-top: 60px;
-    border: 1px solid #dcdfe6;
-    .p1{
-      color: #606266;
-      padding: 15px 20px;
-      background: #f2f6fc;
-      font-weight: 700;
-    }
-    .p2{
-      padding: 20px;
-      font-size: 18px;
-      a{
-        color: #409eff;
-        cursor: pointer;
-        text-decoration: none;
+  .home {
+    .url {
+      margin-top: 60px;
+      border: 1px solid #dcdfe6;
+
+      .p1 {
+        color: #606266;
+        padding: 15px 20px;
+        background: #f2f6fc;
+        font-weight: 700;
+      }
+
+      .p2 {
+        padding: 20px;
+        font-size: 18px;
+
+        a {
+          color: #409eff;
+          cursor: pointer;
+          text-decoration: none;
+        }
       }
     }
   }
-}
 </style>
